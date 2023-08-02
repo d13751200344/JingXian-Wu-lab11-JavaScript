@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item" />
+      <button>Add item</button>
+    </div>
+
+    <ul></ul>
+
+    <script>
+      // 1. Create three variables that hold references to the list (<ul>), <input>, and <button> elements.
+      let ul = document.querySelector("ul");
+      let input = document.querySelector("input");
+      let addButton = document.querySelector("button");
+
+      // 2. Create a function that will run in response to the button being clicked.
+      addButton.addEventListener("click", (e) => {
+        // 3.  Inside the function body, start off by storing the current value of the input element in a variable.
+        let item = input.value;
+
+        // 4. Next, empty the input element by setting its value to an empty sring — ''.
+        input.value = "";
+
+        // 5. Create three new elements — a list item (<li>), <span>, and <button>, and store them in variables.
+        let li = document.createElement("li");
+        let span = document.createElement("span");
+        let deleteButton = document.createElement("button");
+
+        // 6. Append the span and the button as children of the list item.
+        li.appendChild(span);
+        li.appendChild(deleteButton);
+
+        // 7. Set the text content of the span to the input element value you saved earlier, and the text content of the button to 'Delete'.
+        span.textContent = item;
+        deleteButton.textContent = "Delete";
+
+        // 8. Append the list item as a child of the list.
+        ul.appendChild(li);
+
+        // 9. Attach an event handler to the delete button so that, when clicked, it will delete the entire list item (<li>...</li>).
+        deleteButton.addEventListener("click", (e) => {
+          ul.removeChild(li);
+        });
+
+        // 10. Finally, use the focus() method to focus the input element ready for entering the next shopping list item.
+        input.focus();
+      });
+    </script>
+  </body>
+</html>
